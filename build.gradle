@@ -20,3 +20,10 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+task runApp {
+	dependsOn {
+		build
+	}
+	println "java -jar build/libs/scheduler-0.0.1-SNAPSHOT.jar".execute().text
+}
