@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
-public class ComponentBot {
+public class BotRegistration {
     @Autowired
     private SchedulerLongPollingBot schedulerLongPollingBot;
     @Autowired
