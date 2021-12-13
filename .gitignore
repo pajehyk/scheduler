@@ -19,3 +19,5 @@ build
 gradlew
 gradlew.bat
 
+src/main/resources/bot.properties
+
