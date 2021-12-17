@@ -7,13 +7,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import com.pajehyk.scheduler.entities.MyUser;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
 
 public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     private Properties properties = new Properties();
     private String botToken;
     private String botName;
+    @Autowired
+    private TheController theController;
 
     SchedulerLongPollingBot() {
         try (InputStream is = new FileInputStream(new File("src/main/resources/bot.properties"))) {
@@ -28,7 +35,20 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     }
     @Override
     public void onUpdateReceived(Update update) {
-        System.out.println("Update recieved!");
+        Message updateMessage = update.getMessage();
+        String messageText = updateMessage.getText();
+        User user = updateMessage.getFrom();
+        switch (messageText) {
+            case "/start":
+                theController.start(new MyUser(user.getId(), user.getUserName()));
+                break;
+            case "/show":
+                System.out.println(theController.show());
+                break;
+            default:
+                System.out.println("Default case.");
+                break;
+        }
     }
 
     @Override
