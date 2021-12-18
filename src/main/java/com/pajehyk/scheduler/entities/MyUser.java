@@ -1,13 +1,13 @@
 package com.pajehyk.scheduler.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "my_user")
 public class MyUser {
     @Id 
-    @GeneratedValue
     private Long id;
     private String name;
 
