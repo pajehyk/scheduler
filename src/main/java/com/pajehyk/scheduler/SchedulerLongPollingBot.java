@@ -40,7 +40,7 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         User user = updateMessage.getFrom();
         switch (messageText) {
             case "/start":
-                theController.start(new MyUser(user.getId(), user.getUserName()));
+                theController.start(new MyUser(user.getUserName()));
                 break;
             case "/show":
                 System.out.println(theController.show());
