@@ -1,9 +1,7 @@
 package com.pajehyk.scheduler;
 
-import java.util.List;
-
-import com.pajehyk.scheduler.entities.MyUser;
-import com.pajehyk.scheduler.repositories.MyUserRepository;
+import com.pajehyk.scheduler.entities.TelegramUser;
+import com.pajehyk.scheduler.repositories.TelegramUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
     @Autowired
-    MyUserRepository userRepository;
+    TelegramUserRepository telegramUserRepository;
 
-    @GetMapping("/start")
-    public MyUser start(MyUser user) {
-        userRepository.save(user);
-        return user;
-    }
-    
-    public List<MyUser> show() {
-        return userRepository.findAll();
+    @GetMapping("/tg") 
+    public TelegramUser tg(TelegramUser telegramUser){
+        telegramUserRepository.save(telegramUser);
+        return telegramUser;
     }
 }

@@ -5,9 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.Properties;
 
-import com.pajehyk.scheduler.entities.MyUser;
+import com.pajehyk.scheduler.entities.TelegramUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -20,7 +21,7 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     private String botToken;
     private String botName;
     @Autowired
-    private TheController theController;
+    private UserController userController;
 
     SchedulerLongPollingBot() {
         try (InputStream is = new FileInputStream(new File("src/main/resources/bot.properties"))) {
@@ -39,11 +40,9 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         String messageText = updateMessage.getText();
         User user = updateMessage.getFrom();
         switch (messageText) {
-            case "/start":
-                theController.start(new MyUser(user.getUserName()));
-                break;
-            case "/show":
-                System.out.println(theController.show());
+            case "/telegramUser":
+                userController.tg(new TelegramUser(user.getId(), user.getFirstName(), 
+                    user.getLastName(), user.getUserName(), new Date(0)));
                 break;
             default:
                 System.out.println("Default case.");
