@@ -12,9 +12,8 @@ public class UserController {
     @Autowired
     TelegramUserRepository telegramUserRepository;
 
-    @GetMapping("/tg") 
-    public TelegramUser tg(TelegramUser telegramUser){
+    @GetMapping("/start") 
+    public void addTelegramUser(TelegramUser telegramUser){
         telegramUserRepository.save(telegramUser);
-        return telegramUser;
     }
 }

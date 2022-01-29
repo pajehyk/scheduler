@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
+import java.time.Clock;
 import java.util.Properties;
 
 import com.pajehyk.scheduler.entities.TelegramUser;
@@ -40,9 +41,9 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         String messageText = updateMessage.getText();
         User user = updateMessage.getFrom();
         switch (messageText) {
-            case "/telegramUser":
-                userController.tg(new TelegramUser(user.getId(), user.getFirstName(), 
-                    user.getLastName(), user.getUserName(), new Date(0)));
+            case "/start":
+                userController.addTelegramUser(new TelegramUser(user.getId(), user.getFirstName(), 
+                    user.getLastName(), user.getUserName(), new Date(Clock.systemDefaultZone().millis())));
                 break;
             default:
                 System.out.println("Default case.");
