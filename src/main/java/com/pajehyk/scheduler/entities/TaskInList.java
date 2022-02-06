@@ -24,6 +24,9 @@ public class TaskInList {
         this.taskId = taskId;
         this.listId = listId;
     }
+    public Long getId() {
+        return id;
+    }
 
     public Long getTaskId() {
         return taskId;
