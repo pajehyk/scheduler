@@ -9,7 +9,7 @@ import java.sql.Date;
 import java.time.Clock;
 import java.util.Properties;
 
-import com.pajehyk.scheduler.controllers.UserController;
+import com.pajehyk.scheduler.controllers.TelegramUserController;
 import com.pajehyk.scheduler.entities.TelegramUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     private String botToken;
     private String botName;
     @Autowired
-    private UserController userController;
+    private TelegramUserController telegramUserController;
 
     SchedulerLongPollingBot() {
         try (InputStream is = new FileInputStream(new File("src/main/resources/bot.properties"))) {
@@ -43,7 +43,7 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         User user = updateMessage.getFrom();
         switch (messageText) {
             case "/start":
-                userController.addTelegramUser(new TelegramUser(user.getId(), user.getFirstName(), 
+                telegramUserController.addTelegramUser(new TelegramUser(user.getId(), user.getFirstName(),
                     user.getLastName(), user.getUserName(), new Date(Clock.systemDefaultZone().millis())));
                 break;
             default:
