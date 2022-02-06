@@ -1,4 +1,4 @@
-package com.pajehyk.scheduler;
+package com.pajehyk.scheduler.controllers;
 
 import com.pajehyk.scheduler.entities.TelegramUser;
 import com.pajehyk.scheduler.repositories.TelegramUserRepository;

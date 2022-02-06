@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.time.Clock;
 import java.util.Properties;
 
+import com.pajehyk.scheduler.controllers.UserController;
 import com.pajehyk.scheduler.entities.TelegramUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
