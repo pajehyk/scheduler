@@ -1,6 +1,7 @@
 package com.pajehyk.scheduler.entities;
 
 import com.pajehyk.scheduler.Status;
+import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.sql.Date;
 
@@ -36,14 +37,21 @@ public class TelegramUser {
         this.status = status;
     }
 
+    public TelegramUser(User user) {
+        this.telegramId = user.getId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.username = user.getUserName();
+        this.date = new Date(System.currentTimeMillis());
+        this.status = Status.MENU;
+    }
+
     public Long getId() {
         return this.id;
     }
-
     public Long getTelegramId() {
         return this.telegramId;
     }
-
     public String getFirstName() {
         return this.firstName;
     }
@@ -58,5 +66,8 @@ public class TelegramUser {
     }
     public Status getStatus() {
         return this.status;
+    }
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
