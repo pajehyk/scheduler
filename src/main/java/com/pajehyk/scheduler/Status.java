@@ -1,5 +1,5 @@
 package com.pajehyk.scheduler;
 
 public enum Status {
-    MENU, TASKS
+    MENU, TASKS, TASK_DESCRIPTION, TASK_NAME
 }
