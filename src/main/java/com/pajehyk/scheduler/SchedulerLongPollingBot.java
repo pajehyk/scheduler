@@ -9,7 +9,11 @@ import java.sql.Date;
 import java.time.Clock;
 import java.util.Properties;
 
+import com.pajehyk.scheduler.controllers.TaskController;
+import com.pajehyk.scheduler.controllers.TaskInListController;
+import com.pajehyk.scheduler.controllers.TaskListController;
 import com.pajehyk.scheduler.controllers.TelegramUserController;
+import com.pajehyk.scheduler.entities.TaskInList;
 import com.pajehyk.scheduler.entities.TelegramUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,13 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     private String botName;
     @Autowired
     private TelegramUserController telegramUserController;
+    @Autowired
+    private TaskController taskController;
+    @Autowired
+    private TaskInListController taskInListController;
+    @Autowired
+    private TaskListController taskListController;
+
 
     SchedulerLongPollingBot() {
         try (InputStream is = new FileInputStream(new File("src/main/resources/bot.properties"))) {
@@ -47,6 +58,7 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
                     user.getLastName(), user.getUserName(), new Date(Clock.systemDefaultZone().millis()),
                         Status.MENU));
                 break;
+            case "/createTask":
             default:
                 System.out.println("Default case.");
                 break;
