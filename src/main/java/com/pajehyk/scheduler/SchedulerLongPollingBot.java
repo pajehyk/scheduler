@@ -13,6 +13,7 @@ import com.pajehyk.scheduler.controllers.TaskController;
 import com.pajehyk.scheduler.controllers.TaskInListController;
 import com.pajehyk.scheduler.controllers.TaskListController;
 import com.pajehyk.scheduler.controllers.TelegramUserController;
+import com.pajehyk.scheduler.entities.Task;
 import com.pajehyk.scheduler.entities.TaskInList;
 import com.pajehyk.scheduler.entities.TelegramUser;
 
@@ -54,11 +55,12 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         User user = updateMessage.getFrom();
         switch (messageText) {
             case "/start":
-                telegramUserController.addTelegramUser(new TelegramUser(user.getId(), user.getFirstName(),
-                    user.getLastName(), user.getUserName(), new Date(Clock.systemDefaultZone().millis()),
-                        Status.MENU));
+                telegramUserController.addTelegramUser(new TelegramUser(user));
                 break;
             case "/createTask":
+                taskController.addTask(new Task(null, user.getId(), null,
+                        new Date(Clock.systemDefaultZone().millis()), null));
+                telegramUserController.changeTelegramUserStatus(new TelegramUser(user), Status.TASK_NAME);
             default:
                 System.out.println("Default case.");
                 break;
