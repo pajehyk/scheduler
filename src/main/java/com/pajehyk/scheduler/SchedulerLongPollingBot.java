@@ -44,7 +44,8 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         switch (messageText) {
             case "/start":
                 telegramUserController.addTelegramUser(new TelegramUser(user.getId(), user.getFirstName(),
-                    user.getLastName(), user.getUserName(), new Date(Clock.systemDefaultZone().millis())));
+                    user.getLastName(), user.getUserName(), new Date(Clock.systemDefaultZone().millis()),
+                        Status.MENU));
                 break;
             default:
                 System.out.println("Default case.");
