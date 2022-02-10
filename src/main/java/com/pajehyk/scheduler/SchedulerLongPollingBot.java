@@ -54,6 +54,7 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         String messageText = updateMessage.getText();
         User user = updateMessage.getFrom();
         Long taskId;
+        Long userId = user.getId();
         switch (messageText) {
             case "/start":
                 telegramUserController.addTelegramUser(new TelegramUser(user));
@@ -73,6 +74,13 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
                     case TASK_NAME:
                         taskId = telegramUserController.getCurrentTask(user.getId());
                         taskController.changeTaskName(taskId, messageText);
+                        telegramUserController.changeTelegramUserStatus(userId, Status.TASK_DESCRIPTION);
+                        break;
+                    case TASK_DESCRIPTION:
+                        taskId = telegramUserController.getCurrentTask(user.getId());
+                        taskController.changeTaskDescription(taskId, messageText);
+                        telegramUserController.changeTelegramUserStatus(userId, Status.MENU);
+                        break;
                 }
                 System.out.println("Default case.");
                 break;

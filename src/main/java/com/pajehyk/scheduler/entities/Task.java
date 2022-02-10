@@ -57,7 +57,9 @@ public class Task {
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
-
+    public void setDescription(String description) {
+        this.description = description;
+    }
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

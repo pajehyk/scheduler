@@ -24,4 +24,10 @@ public class TaskController {
         taskRepository.save(fetchedTask);
     }
 
+    public void changeTaskDescription(Long taskId, String taskDescription) {
+        Task fetchedTask = fetchTask(taskId);
+        fetchedTask.setDescription(taskDescription);
+        taskRepository.save(fetchedTask);
+    }
+
 }

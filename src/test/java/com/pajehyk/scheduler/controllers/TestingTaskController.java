@@ -17,11 +17,12 @@ public class TestingTaskController {
     @Autowired
     private TaskRepository taskRepository;
 
+    Task testTask = new Task("", -1L,
+            "", new Date(1), new Date(1));
     @Test
     @Transactional
     public void testAddTask() {
-        Task task = taskController.addTask(new Task("", -1L,
-                "", new Date(1), new Date(1)));
+        Task task = taskController.addTask(testTask);
         Task fetchedTask = taskRepository.getById(task.getId());
         assertTrue(task.equals(fetchedTask));
     }
@@ -29,8 +30,7 @@ public class TestingTaskController {
     @Test
     @Transactional
     public void testFetchTask() {
-        Task task = taskRepository.save(new Task("", -1L,
-                "", new Date(1), new Date(1)));
+        Task task = taskRepository.save(testTask);
         Task fetchedTask = taskController.fetchTask(task.getId());
         assertTrue(fetchedTask.equals(task));
     }
@@ -39,10 +39,18 @@ public class TestingTaskController {
     @Transactional
     public void testChangeTaskName() {
         String taskName = "taskName";
-        Task task = taskController.addTask(new Task("", -1L,
-                "", new Date(1), new Date(1)));
+        Task task = taskController.addTask(testTask);
         taskController.changeTaskName(task.getId(), taskName);
         Task fetchedTask = taskController.fetchTask(task.getId());
         assertTrue(taskName.equals(fetchedTask.getTaskName()));
+    }
+    @Test
+    @Transactional
+    public void testChangeTaskDescription() {
+        String taskDescription = "taskDescription";
+        Task task = taskController.addTask(testTask);
+        taskController.changeTaskDescription(task.getId(), taskDescription);
+        Task fetchedTask = taskController.fetchTask(task.getId());
+        assertTrue(taskDescription.equals(fetchedTask.getDescription()));
     }
 }
