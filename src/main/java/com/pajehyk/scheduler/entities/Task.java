@@ -38,11 +38,9 @@ public class Task {
     public Long getId() {
         return this.id;
     }
-
     public String getTaskName() {
         return this.taskName;
     }
-
     public Long getUserId() {
         return this.userId;
     }
@@ -54,5 +52,39 @@ public class Task {
     }
     public Date getCompletionDate() {
         return this.completionDate;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Task objTask = (Task) obj;
+        if (!this.getId().equals(objTask.getId())) {
+            return false;
+        }
+        if (!this.getTaskName().equals(objTask.getTaskName())) {
+            return false;
+        }
+        if (!this.getUserId().equals(objTask.getUserId())) {
+            return false;
+        }
+        if (!this.getDescription().equals(objTask.getDescription())) {
+            return false;
+        }
+        if (!this.getCreationDate().equals(objTask.getCreationDate())) {
+            return false;
+        }
+        if (!this.getCompletionDate().equals(objTask.getCompletionDate())) {
+            return false;
+        }
+        return true;
     }
 }
