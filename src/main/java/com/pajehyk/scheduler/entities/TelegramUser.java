@@ -24,17 +24,20 @@ public class TelegramUser {
     private Date date;
     @Enumerated(EnumType.STRING)
     private Status status;
+    @Column(name = "current_task_id")
+    private Long currentTaskId;
 
     protected TelegramUser() {}
 
     public TelegramUser(Long telegramId, String firstName, String lastName, String username,
-                        Date date, Status status) {
+                        Date date, Status status, Long currentTaskId) {
         this.telegramId = telegramId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.date = date;
         this.status = status;
+        this.currentTaskId = currentTaskId;
     }
 
     public TelegramUser(User user) {
@@ -44,6 +47,10 @@ public class TelegramUser {
         this.username = user.getUserName();
         this.date = new Date(System.currentTimeMillis());
         this.status = Status.MENU;
+    }
+
+    public TelegramUser(long telegramId) {
+        this.telegramId = telegramId;
     }
 
     public Long getId() {
@@ -67,7 +74,13 @@ public class TelegramUser {
     public Status getStatus() {
         return this.status;
     }
+    public Long getCurrentTaskId() {
+        return this.currentTaskId;
+    }
     public void setStatus(Status status) {
         this.status = status;
+    }
+    public void setCurrentTaskId(Long currentTaskId) {
+        this.currentTaskId = currentTaskId;
     }
 }

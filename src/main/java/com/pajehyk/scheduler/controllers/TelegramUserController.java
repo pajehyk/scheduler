@@ -6,11 +6,9 @@ import com.pajehyk.scheduler.repositories.TelegramUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
 
 @RestController
 public class TelegramUserController {
@@ -22,9 +20,30 @@ public class TelegramUserController {
         telegramUserRepository.save(telegramUser);
     }
 
-    public void changeTelegramUserStatus(TelegramUser telegramUser, Status status) {
-        Example<TelegramUser> example = Example.of(telegramUser);
-        TelegramUser foundUser = telegramUserRepository.findOne(example).get();
-        foundUser.setStatus(status);
+    public void changeTelegramUserStatus(long telegramId, Status status) {
+        TelegramUser fetchedUser = this.fetchTelegramUser(telegramId);
+        fetchedUser.setStatus(status);
+        telegramUserRepository.save(fetchedUser);
+    }
+
+    public TelegramUser fetchTelegramUser(long telegramId) {
+        TelegramUser telegramUser = new TelegramUser(telegramId);
+        return telegramUserRepository.findOne(Example.of(telegramUser)).get();
+    }
+
+    public void changeTelegramUserCurrentTask(long telegramId, long currentTaskId) {
+        TelegramUser telegramUser = fetchTelegramUser(telegramId);
+        telegramUser.setCurrentTaskId(currentTaskId);
+        telegramUserRepository.save(telegramUser);
+    }
+
+    public Status getTelegramUserStatus(long telegramId) {
+        TelegramUser telegramUser = fetchTelegramUser(telegramId);
+        return telegramUser.getStatus();
+    }
+
+    public Long getCurrentTask(long telegramId) {
+        TelegramUser telegramUser = fetchTelegramUser(telegramId);
+        return telegramUser.getCurrentTaskId();
     }
 }
