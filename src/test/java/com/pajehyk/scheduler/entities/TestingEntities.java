@@ -54,7 +54,7 @@ public class TestingEntities {
     @Transactional
     public void TestingTelegramUser() {
         TelegramUser telegramUser = new TelegramUser(123123L, "firstname",
-                "lastname", "username", new Date(System.currentTimeMillis()), Status.MENU);
+                "lastname", "username", new Date(System.currentTimeMillis()), Status.MENU, -1L);
         TelegramUser savedTelegramUser = telegramUserRepository.save(telegramUser);
     }
 }
