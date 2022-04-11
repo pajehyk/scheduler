@@ -55,36 +55,6 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         User user = updateMessage.getFrom();
         Long taskId;
         Long userId = user.getId();
-        switch (messageText) {
-            case "/start":
-                telegramUserController.addTelegramUser(new TelegramUser(user));
-                break;
-            case "/createTask":
-                taskId = taskController.addTask(new Task(null, user.getId(), null,
-                        new Date(Clock.systemDefaultZone().millis()), null)).getId();
-                telegramUserController.changeTelegramUserStatus(user.getId(), Status.TASK_NAME);
-                telegramUserController.changeTelegramUserCurrentTask(user.getId(), taskId);
-                break;
-            case "/cancel":
-                telegramUserController.changeTelegramUserStatus(user.getId(), Status.MENU);
-                break;
-            default:
-                Status status = telegramUserController.getTelegramUserStatus(user.getId());
-                switch (status) {
-                    case TASK_NAME:
-                        taskId = telegramUserController.getCurrentTask(user.getId());
-                        taskController.changeTaskName(taskId, messageText);
-                        telegramUserController.changeTelegramUserStatus(userId, Status.TASK_DESCRIPTION);
-                        break;
-                    case TASK_DESCRIPTION:
-                        taskId = telegramUserController.getCurrentTask(user.getId());
-                        taskController.changeTaskDescription(taskId, messageText);
-                        telegramUserController.changeTelegramUserStatus(userId, Status.MENU);
-                        break;
-                }
-                System.out.println("Default case.");
-                break;
-        }
     }
 
     @Override
