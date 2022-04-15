@@ -5,18 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Date;
-import java.time.Clock;
+import java.util.HashMap;
 import java.util.Properties;
 
-import com.pajehyk.scheduler.controllers.TaskController;
-import com.pajehyk.scheduler.controllers.TaskInListController;
-import com.pajehyk.scheduler.controllers.TaskListController;
-import com.pajehyk.scheduler.controllers.TelegramUserController;
-import com.pajehyk.scheduler.entities.Task;
-import com.pajehyk.scheduler.entities.TaskInList;
 import com.pajehyk.scheduler.entities.TelegramUser;
 
+import com.pajehyk.scheduler.handlers.Handler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -28,13 +22,8 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     private String botToken;
     private String botName;
     @Autowired
-    private TelegramUserController telegramUserController;
-    @Autowired
-    private TaskController taskController;
-    @Autowired
-    private TaskInListController taskInListController;
-    @Autowired
-    private TaskListController taskListController;
+    private HashMap<String, Handler> handlersMap;
+
 
 
     SchedulerLongPollingBot() {
@@ -55,6 +44,8 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         User user = updateMessage.getFrom();
         Long taskId;
         Long userId = user.getId();
+        TelegramUser telegramUser = new TelegramUser(user);
+        handlersMap.get(messageText).execute(telegramUser);
     }
 
     @Override

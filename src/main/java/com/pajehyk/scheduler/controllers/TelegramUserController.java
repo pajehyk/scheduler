@@ -6,9 +6,7 @@ import com.pajehyk.scheduler.repositories.TelegramUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -17,8 +15,8 @@ public class TelegramUserController {
     @Autowired
     TelegramUserRepository telegramUserRepository;
 
-    @GetMapping("/start") 
-    public void addTelegramUser(TelegramUser telegramUser){
+    @PostMapping("/start")
+    public void addTelegramUser(@RequestBody TelegramUser telegramUser){
         telegramUserRepository.save(telegramUser);
     }
     public void changeTelegramUserStatus(long telegramId, Status status) {

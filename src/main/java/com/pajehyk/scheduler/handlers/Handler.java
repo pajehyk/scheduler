@@ -1,5 +1,6 @@
 package com.pajehyk.scheduler.handlers;
 
-public interface Handler {
-    public void execute();
+public abstract class Handler {
+    String url = "http://localhost:8080";
+    public abstract <T> void execute(T obj);
 }
