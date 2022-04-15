@@ -1,5 +1,6 @@
 package com.pajehyk.scheduler;
 
+import com.pajehyk.scheduler.handlers.AddTaskHandler;
 import com.pajehyk.scheduler.handlers.Handler;
 import com.pajehyk.scheduler.handlers.StartHandler;
 import org.springframework.context.annotation.Bean;
@@ -27,9 +28,14 @@ public class AppConfiguration {
         return new StartHandler();
     }
     @Bean
+    Handler addTaskHandler() {
+        return new AddTaskHandler();
+    }
+    @Bean
     HashMap<String, Handler> handlersMap() {
         HashMap<String, Handler> hashMap = new HashMap<>();
         hashMap.put("/start", startHandler());
+        hashMap.put("/addTask", addTaskHandler());
         return hashMap;
     }
 }

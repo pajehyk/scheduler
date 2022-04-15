@@ -8,9 +8,11 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
 
+import com.pajehyk.scheduler.entities.Task;
 import com.pajehyk.scheduler.entities.TelegramUser;
 
 import com.pajehyk.scheduler.handlers.Handler;
+import com.pajehyk.scheduler.handlers.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -45,7 +47,9 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         Long taskId;
         Long userId = user.getId();
         TelegramUser telegramUser = new TelegramUser(user);
-        handlersMap.get(messageText).execute(telegramUser);
+        Task task = new Task(null, null, null, null, null);
+        Query query = new Query(telegramUser, task, "");
+        handlersMap.get(messageText).execute(query);
     }
 
     @Override
