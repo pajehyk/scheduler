@@ -7,6 +7,7 @@ public class Query {
     private TelegramUser telegramUser;
     private Task task;
     private String string;
+    private String taskName;
 
     public Query() {}
 
@@ -15,12 +16,29 @@ public class Query {
         this.task = task;
         this.string = string;
     }
+
+    public void setString(String string) {
+        this.string = string;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
     public void setTask(Task task) {
         this.task = task;
     }
 
     public void setTelegramUser(TelegramUser telegramUser) {
         this.telegramUser = telegramUser;
+    }
+
+    public String getString() {
+        return string;
+    }
+
+    public String getTaskName() {
+        return taskName;
     }
 
     public Task getTask() {

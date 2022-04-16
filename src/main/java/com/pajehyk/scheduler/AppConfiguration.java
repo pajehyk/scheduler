@@ -1,8 +1,6 @@
 package com.pajehyk.scheduler;
 
-import com.pajehyk.scheduler.handlers.AddTaskHandler;
-import com.pajehyk.scheduler.handlers.Handler;
-import com.pajehyk.scheduler.handlers.StartHandler;
+import com.pajehyk.scheduler.handlers.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -32,10 +30,16 @@ public class AppConfiguration {
         return new AddTaskHandler();
     }
     @Bean
+    Handler changeTaskNameHandler() {
+        return new ChangeTaskNameHandler();
+    }
+    @Bean
     HashMap<String, Handler> handlersMap() {
         HashMap<String, Handler> hashMap = new HashMap<>();
         hashMap.put("/start", startHandler());
         hashMap.put("/addTask", addTaskHandler());
+        hashMap.put("/changeName", changeTaskNameHandler());
+        hashMap.put("/changeTaskName", changeTaskNameHandler());
         return hashMap;
     }
 }

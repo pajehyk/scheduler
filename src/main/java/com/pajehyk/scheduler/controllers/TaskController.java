@@ -3,10 +3,9 @@ package com.pajehyk.scheduler.controllers;
 import com.pajehyk.scheduler.entities.Task;
 import com.pajehyk.scheduler.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/task")
@@ -23,7 +22,10 @@ public class TaskController {
         Task fetchedTask = taskRepository.getById(taskId);
         return fetchedTask;
     }
-    public void changeTaskName(Long taskId, String taskName) {
+    @PutMapping("/changeName")
+    public void changeTaskName(@RequestBody Map<String, String> json) {
+        Long taskId = Long.parseLong(json.get("taskId"));
+        String taskName = json.get("taskName");
         Task fetchedTask = fetchTask(taskId);
         fetchedTask.setTaskName(taskName);
         taskRepository.save(fetchedTask);

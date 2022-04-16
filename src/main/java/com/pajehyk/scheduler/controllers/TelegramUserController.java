@@ -33,6 +33,11 @@ public class TelegramUserController {
         telegramUser.setCurrentTaskId(currentTaskId);
         telegramUserRepository.save(telegramUser);
     }
+    public void changeTelegramUserCurrentHandler(long telegramId, String currentHandlerString) {
+        TelegramUser telegramUser = fetchTelegramUser(telegramId);
+        telegramUser.setCurrentHandler(currentHandlerString);
+        telegramUserRepository.save(telegramUser);
+    }
     public Status getTelegramUserStatus(long telegramId) {
         TelegramUser telegramUser = fetchTelegramUser(telegramId);
         return telegramUser.getStatus();
