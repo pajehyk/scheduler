@@ -3,7 +3,6 @@ package com.pajehyk.scheduler.handlers;
 import com.pajehyk.scheduler.controllers.TelegramUserController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -24,15 +23,5 @@ public class ChangeTaskNameHandler extends Handler {
         HttpEntity<Map<String, String>> httpEntity = new HttpEntity<>(map);
         template.put(url + "/task/changeName", httpEntity);
         telegramUserController.changeTelegramUserCurrentHandler(telegramId, "/changeTaskDescription");
-    }
-
-    private class Body {
-        private Long taskId;
-        private String taskName;
-
-        public Body(Long taskId, String taskName) {
-            this.taskId = taskId;
-            this.taskName = taskName;
-        }
     }
 }
