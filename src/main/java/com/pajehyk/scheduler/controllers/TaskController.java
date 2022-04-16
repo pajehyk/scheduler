@@ -30,7 +30,10 @@ public class TaskController {
         fetchedTask.setTaskName(taskName);
         taskRepository.save(fetchedTask);
     }
-    public void changeTaskDescription(Long taskId, String taskDescription) {
+    @PutMapping("/changeDescription")
+    public void changeTaskDescription(@RequestBody Map<String, String> json) {
+        Long taskId = Long.parseLong(json.get("taskId"));
+        String taskDescription = json.get("taskDescription");
         Task fetchedTask = fetchTask(taskId);
         fetchedTask.setDescription(taskDescription);
         taskRepository.save(fetchedTask);

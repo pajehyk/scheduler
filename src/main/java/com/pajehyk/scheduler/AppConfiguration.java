@@ -34,12 +34,17 @@ public class AppConfiguration {
         return new ChangeTaskNameHandler();
     }
     @Bean
+    Handler changeTaskDescriptionHandler() {
+        return new ChangeTaskDescriptionHandler();
+    }
+    @Bean
     HashMap<String, Handler> handlersMap() {
         HashMap<String, Handler> hashMap = new HashMap<>();
         hashMap.put("/start", startHandler());
         hashMap.put("/addTask", addTaskHandler());
         hashMap.put("/changeName", changeTaskNameHandler());
         hashMap.put("/changeTaskName", changeTaskNameHandler());
+        hashMap.put("/changeTaskDescription", changeTaskDescriptionHandler());
         return hashMap;
     }
 }

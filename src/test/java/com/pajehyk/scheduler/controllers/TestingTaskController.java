@@ -43,7 +43,7 @@ public class TestingTaskController {
         taskController.changeTaskName(task.getId(), taskName);
         Task fetchedTask = taskController.fetchTask(task.getId());
         assertTrue(taskName.equals(fetchedTask.getTaskName()));
-    }*/
+    }
     @Test
     @Transactional
     public void testChangeTaskDescription() {
@@ -53,4 +53,5 @@ public class TestingTaskController {
         Task fetchedTask = taskController.fetchTask(task.getId());
         assertTrue(taskDescription.equals(fetchedTask.getDescription()));
     }
+     */
 }
