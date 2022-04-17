@@ -1,6 +1,5 @@
 package com.pajehyk.scheduler.controllers;
 
-import com.pajehyk.scheduler.Status;
 import com.pajehyk.scheduler.entities.TelegramUser;
 import com.pajehyk.scheduler.repositories.TelegramUserRepository;
 
@@ -9,7 +8,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
 
 @RestController
 @RequestMapping("/user")
@@ -25,6 +23,7 @@ public class TelegramUserController {
         TelegramUser telegramUser = new TelegramUser(telegramId);
         return telegramUserRepository.findOne(Example.of(telegramUser)).get();
     }
+
     @PutMapping("/changeTask")
     public void changeTelegramUserCurrentTask(@RequestBody Map<String, String> json) {
         Long telegramId = Long.parseLong(json.get("telegramId"));
@@ -33,6 +32,7 @@ public class TelegramUserController {
         telegramUser.setCurrentTaskId(currentTaskId);
         telegramUserRepository.save(telegramUser);
     }
+
     @PutMapping("/changeHandler")
     public void changeTelegramUserCurrentHandler(@RequestBody Map <String, String> json) {
         Long telegramId = Long.parseLong(json.get("telegramId"));
@@ -41,10 +41,7 @@ public class TelegramUserController {
         telegramUser.setCurrentHandler(handlerString);
         telegramUserRepository.save(telegramUser);
     }
-    public Status getTelegramUserStatus(long telegramId) {
-        TelegramUser telegramUser = fetchTelegramUser(telegramId);
-        return telegramUser.getStatus();
-    }
+
     public Long getCurrentTask(long telegramId) {
         TelegramUser telegramUser = fetchTelegramUser(telegramId);
         return telegramUser.getCurrentTaskId();

@@ -2,7 +2,6 @@ package com.pajehyk.scheduler.entities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.pajehyk.scheduler.Status;
 import com.pajehyk.scheduler.repositories.TaskInListRepository;
 import com.pajehyk.scheduler.repositories.TaskListRepository;
 import com.pajehyk.scheduler.repositories.TaskRepository;
@@ -48,13 +47,5 @@ public class TestingEntities {
     public void TestingTaskList() {
         TaskList taskList = new TaskList("name", "description", 1L, 1L);
         TaskList savedTaskList = taskListRepository.save(taskList);
-    }
-    @Test
-    @Rollback
-    @Transactional
-    public void TestingTelegramUser() {
-        TelegramUser telegramUser = new TelegramUser(123123L, "firstname",
-                "lastname", "username", new Date(System.currentTimeMillis()), Status.MENU, -1L);
-        TelegramUser savedTelegramUser = telegramUserRepository.save(telegramUser);
     }
 }

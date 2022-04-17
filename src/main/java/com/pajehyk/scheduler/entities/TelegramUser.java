@@ -1,6 +1,5 @@
 package com.pajehyk.scheduler.entities;
 
-import com.pajehyk.scheduler.Status;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.sql.Date;
@@ -22,8 +21,6 @@ public class TelegramUser {
     private String username;
     @Column(name = "registered_at")
     private Date date;
-    @Enumerated(EnumType.STRING)
-    private Status status;
     @Column(name = "current_task_id")
     private Long currentTaskId;
     @Column(name = "current_handler")
@@ -35,13 +32,12 @@ public class TelegramUser {
         this.telegramId = telegramId;
     }
     public TelegramUser(Long telegramId, String firstName, String lastName, String username,
-                        Date date, Status status, Long currentTaskId) {
+                        Date date, Long currentTaskId) {
         this.telegramId = telegramId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.date = date;
-        this.status = status;
         this.currentTaskId = currentTaskId;
     }
 
@@ -51,7 +47,6 @@ public class TelegramUser {
         this.lastName = user.getLastName();
         this.username = user.getUserName();
         this.date = new Date(System.currentTimeMillis());
-        this.status = Status.MENU;
     }
 
     public TelegramUser(long telegramId) {
@@ -77,10 +72,6 @@ public class TelegramUser {
         return this.date;
     }
 
-    public Status getStatus() {
-        return this.status;
-    }
-
     public Long getCurrentTaskId() {
         return this.currentTaskId;
     }
@@ -89,9 +80,6 @@ public class TelegramUser {
         return currentHandler;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
     public void setCurrentTaskId(Long currentTaskId) {
         this.currentTaskId = currentTaskId;
     }
