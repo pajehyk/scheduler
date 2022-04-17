@@ -17,7 +17,6 @@ import com.pajehyk.scheduler.handlers.Query;
 import com.pajehyk.scheduler.repositories.TelegramUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Example;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -53,10 +52,8 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         Message updateMessage = update.getMessage();
         String messageText = updateMessage.getText();
         User user = updateMessage.getFrom();
-        Long taskId;
-        Long userId = user.getId();
         TelegramUser telegramUser = new TelegramUser(user);
-        Task task = new Task(null, null, null, null, null);
+        Task task = new Task(null, telegramUser.getTelegramId(), null, null, null);
         Query query = new Query(telegramUser, task, "");
         if (messageText.startsWith("/")) {
             System.out.println(handlersMap.size());
