@@ -2,8 +2,10 @@ package com.pajehyk.scheduler.handlers;
 
 import com.pajehyk.scheduler.entities.TelegramUser;
 import org.springframework.http.HttpEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+@Component
 public class StartHandler extends Handler{
     public StartHandler() {}
 

@@ -1,6 +1,7 @@
 package com.pajehyk.scheduler;
 
 import com.pajehyk.scheduler.handlers.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -11,6 +12,16 @@ import java.util.HashMap;
 
 @Configuration
 public class AppConfiguration {
+    @Autowired
+    AddTaskHandler addTaskHandler;
+    @Autowired
+    ChangeTelegramUserTaskHandler changeTelegramUserTaskHandler;
+    @Autowired
+    ChangeTaskNameHandler changeTaskNameHandler;
+    @Autowired
+    ChangeTaskDescriptionHandler changeTaskDescriptionHandler;
+    @Autowired
+    StartHandler startHandler;
     @Bean
     public SchedulerLongPollingBot schedulerLongPollingBot() {
         return new SchedulerLongPollingBot();
@@ -20,7 +31,7 @@ public class AppConfiguration {
     TelegramBotsApi telegramBotsApi() throws TelegramApiException {
         return new TelegramBotsApi(DefaultBotSession.class);
     }
-
+/*
     @Bean
     Handler startHandler() {
         return new StartHandler();
@@ -38,13 +49,18 @@ public class AppConfiguration {
         return new ChangeTaskDescriptionHandler();
     }
     @Bean
+    Handler changeTelegramUserTaskHandler() {
+        return new ChangeTelegramUserTaskHandler();
+    }
+ */
+    @Bean
     HashMap<String, Handler> handlersMap() {
         HashMap<String, Handler> hashMap = new HashMap<>();
-        hashMap.put("/start", startHandler());
-        hashMap.put("/addTask", addTaskHandler());
-        hashMap.put("/changeName", changeTaskNameHandler());
-        hashMap.put("/changeTaskName", changeTaskNameHandler());
-        hashMap.put("/changeTaskDescription", changeTaskDescriptionHandler());
+        hashMap.put("/start", startHandler);
+        hashMap.put("/addTask", addTaskHandler);
+        hashMap.put("/changeTaskName", changeTaskNameHandler);
+        hashMap.put("/changeTaskDescription", changeTaskDescriptionHandler);
+        hashMap.put("/changeTelegramUserTask", changeTelegramUserTaskHandler);
         return hashMap;
     }
 }

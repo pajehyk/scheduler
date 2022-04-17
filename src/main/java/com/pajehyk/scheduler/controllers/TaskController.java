@@ -12,16 +12,19 @@ import java.util.Map;
 public class TaskController {
     @Autowired
     private TaskRepository taskRepository;
+
     @PostMapping("/add")
-    public Task addTask(Task task) {
+    public Task addTask(@RequestBody Task task) {
         Task task1 = taskRepository.save(task);
         return task1;
     }
+
     @GetMapping("/fetch")
     public Task fetchTask(Long taskId) {
         Task fetchedTask = taskRepository.getById(taskId);
         return fetchedTask;
     }
+
     @PutMapping("/changeName")
     public void changeTaskName(@RequestBody Map<String, String> json) {
         Long taskId = Long.parseLong(json.get("taskId"));
@@ -30,6 +33,7 @@ public class TaskController {
         fetchedTask.setTaskName(taskName);
         taskRepository.save(fetchedTask);
     }
+
     @PutMapping("/changeDescription")
     public void changeTaskDescription(@RequestBody Map<String, String> json) {
         Long taskId = Long.parseLong(json.get("taskId"));
@@ -38,5 +42,4 @@ public class TaskController {
         fetchedTask.setDescription(taskDescription);
         taskRepository.save(fetchedTask);
     }
-
 }

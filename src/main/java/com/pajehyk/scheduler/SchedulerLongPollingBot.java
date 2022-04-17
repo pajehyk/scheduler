@@ -16,6 +16,7 @@ import com.pajehyk.scheduler.handlers.Handler;
 import com.pajehyk.scheduler.handlers.Query;
 import com.pajehyk.scheduler.repositories.TelegramUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -31,6 +32,7 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     private String botToken;
     private String botName;
     @Autowired
+    @Qualifier("handlersMap")
     private HashMap<String, Handler> handlersMap;
 
 
@@ -57,6 +59,7 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         Task task = new Task(null, null, null, null, null);
         Query query = new Query(telegramUser, task, "");
         if (messageText.startsWith("/")) {
+            System.out.println(handlersMap.size());
             handlersMap.get(messageText).execute(query);
         } else {
             Long currentTask = telegramUserController.getCurrentTask(telegramUser.getTelegramId());
@@ -78,5 +81,4 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     public String getBotToken() {
         return botToken;
     }
-    
 }

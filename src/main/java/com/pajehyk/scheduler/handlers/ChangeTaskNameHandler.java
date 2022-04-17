@@ -3,11 +3,13 @@ package com.pajehyk.scheduler.handlers;
 import com.pajehyk.scheduler.controllers.TelegramUserController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class ChangeTaskNameHandler extends Handler {
     @Autowired
     TelegramUserController telegramUserController;

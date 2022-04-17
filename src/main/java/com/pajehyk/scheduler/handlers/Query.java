@@ -8,6 +8,7 @@ public class Query {
     private Task task;
     private String string;
     private String taskName;
+    private Long taskId;
 
     public Query() {}
 
@@ -21,6 +22,10 @@ public class Query {
         this.string = string;
     }
 
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
+    }
+
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
@@ -31,6 +36,10 @@ public class Query {
 
     public void setTelegramUser(TelegramUser telegramUser) {
         this.telegramUser = telegramUser;
+    }
+
+    public Long getTaskId() {
+        return taskId;
     }
 
     public String getString() {
