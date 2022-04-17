@@ -17,10 +17,14 @@ import com.pajehyk.scheduler.handlers.Query;
 import com.pajehyk.scheduler.repositories.TelegramUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     @Autowired
@@ -55,17 +59,28 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         TelegramUser telegramUser = new TelegramUser(user);
         Task task = new Task(null, telegramUser.getTelegramId(), null, null, null);
         Query query = new Query(telegramUser, task, "");
+        String text;
         if (messageText.startsWith("/")) {
-            System.out.println(handlersMap.size());
             handlersMap.get(messageText).execute(query);
+            text = handlersMap.get(messageText).getMessage();
         } else {
             Long currentTask = telegramUserController.getCurrentTask(telegramUser.getTelegramId());
             TelegramUser fetchedUser = telegramUserController.fetchTelegramUser(telegramUser.getTelegramId());
             String currentHandler = fetchedUser.getCurrentHandler();
-            System.out.println(currentHandler);
             query.setString(messageText);
             query.setTelegramUser(fetchedUser);
             handlersMap.get(currentHandler).execute(query);
+            text = handlersMap.get(currentHandler).getMessage();
+        }
+        if (text != null) {
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.setChatId(updateMessage.getChatId().toString());
+            sendMessage.setText(text);
+            try {
+                execute(sendMessage);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
         }
     }
 

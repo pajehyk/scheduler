@@ -29,4 +29,9 @@ public class ChangeTaskNameHandler extends Handler {
         obj.setString("/changeTaskDescription");
         changeTelegramUserHandlerHandler.execute(obj);
     }
+
+    @Override
+    public String getMessage() {
+        return "Enter description of your task: ";
+    }
 }
