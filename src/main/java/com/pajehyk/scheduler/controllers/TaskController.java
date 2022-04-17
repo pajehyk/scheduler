@@ -19,9 +19,9 @@ public class TaskController {
         return task1;
     }
 
-    @GetMapping("/fetch")
-    public Task fetchTask(Long taskId) {
-        Task fetchedTask = taskRepository.getById(taskId);
+    @GetMapping("/fetch/{id}")
+    Task fetchTask(@PathVariable Long id) {
+        Task fetchedTask = taskRepository.findById(id).get();
         return fetchedTask;
     }
 
