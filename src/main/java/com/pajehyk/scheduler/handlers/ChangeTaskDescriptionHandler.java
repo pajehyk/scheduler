@@ -13,6 +13,8 @@ import java.util.Map;
 public class ChangeTaskDescriptionHandler extends Handler {
     @Autowired
     TelegramUserController telegramUserController;
+    @Autowired
+    ChangeTelegramUserHandlerHandler changeTelegramUserHandlerHandler;
     @Override
     public void execute(Query obj) {
         Long telegramId = obj.getTelegramUser().getTelegramId();
@@ -24,6 +26,7 @@ public class ChangeTaskDescriptionHandler extends Handler {
         map.put("taskId", taskId.toString());
         HttpEntity<Map<String, String>> httpEntity = new HttpEntity<>(map);
         template.put(url + "/task/changeDescription", httpEntity);
-        telegramUserController.changeTelegramUserCurrentHandler(telegramId, null);
+        obj.setString(null);
+        changeTelegramUserHandlerHandler.execute(obj);
     }
 }

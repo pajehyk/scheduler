@@ -34,9 +34,11 @@ public class TelegramUserController {
         telegramUserRepository.save(telegramUser);
     }
     @PutMapping("/changeHandler")
-    public void changeTelegramUserCurrentHandler(long telegramId, String currentHandlerString) {
+    public void changeTelegramUserCurrentHandler(@RequestBody Map <String, String> json) {
+        Long telegramId = Long.parseLong(json.get("telegramId"));
+        String handlerString = json.get("handlerString");
         TelegramUser telegramUser = fetchTelegramUser(telegramId);
-        telegramUser.setCurrentHandler(currentHandlerString);
+        telegramUser.setCurrentHandler(handlerString);
         telegramUserRepository.save(telegramUser);
     }
     public Status getTelegramUserStatus(long telegramId) {

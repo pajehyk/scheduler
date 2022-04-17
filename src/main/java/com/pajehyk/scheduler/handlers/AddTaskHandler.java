@@ -13,6 +13,8 @@ import java.util.Map;
 public class AddTaskHandler extends Handler{
     @Autowired
     private ChangeTelegramUserTaskHandler changeTelegramUserTaskHandler;
+    @Autowired
+    private ChangeTelegramUserHandlerHandler changeTelegramUserHandlerHandler;
     @Override
     public  void execute(Query obj) {
         Task task = obj.getTask();
@@ -20,6 +22,8 @@ public class AddTaskHandler extends Handler{
         RestTemplate template = new RestTemplate();
         Task addedTask = template.postForEntity(url + "/task/add", httpEntity, Task.class).getBody();
         obj.setTaskId(addedTask.getId());
+        obj.setString("/changeTaskName");
         changeTelegramUserTaskHandler.execute(obj);
+        changeTelegramUserHandlerHandler.execute(obj);
     }
 }
