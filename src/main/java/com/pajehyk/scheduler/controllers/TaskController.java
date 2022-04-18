@@ -3,8 +3,10 @@ package com.pajehyk.scheduler.controllers;
 import com.pajehyk.scheduler.entities.Task;
 import com.pajehyk.scheduler.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
@@ -23,6 +25,15 @@ public class TaskController {
     Task fetchTask(@PathVariable Long id) {
         Task fetchedTask = taskRepository.findById(id).get();
         return fetchedTask;
+    }
+
+    @GetMapping("/fetch")
+    ArrayList<Task> fetch(@RequestBody Map<String, String> json) {
+        Long telegramId = Long.parseLong(json.get("telegramId"));
+        Task task = new Task(null, telegramId, null, null, null);
+        Example example = Example.of(task);
+        ArrayList<Task> taskList = (ArrayList<Task>) taskRepository.findAll(example);
+        return taskList;
     }
 
     @PutMapping("/changeName")
