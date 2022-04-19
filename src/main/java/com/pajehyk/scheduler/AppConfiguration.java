@@ -22,6 +22,8 @@ public class AppConfiguration {
     ChangeTaskDescriptionHandler changeTaskDescriptionHandler;
     @Autowired
     StartHandler startHandler;
+    @Autowired
+    TaskFetchAllHandler taskFetchAllHandler;
     @Bean
     public SchedulerLongPollingBot schedulerLongPollingBot() {
         return new SchedulerLongPollingBot();
@@ -61,6 +63,7 @@ public class AppConfiguration {
         hashMap.put("/changeTaskName", changeTaskNameHandler);
         hashMap.put("/changeTaskDescription", changeTaskDescriptionHandler);
         hashMap.put("/changeTelegramUserTask", changeTelegramUserTaskHandler);
+        hashMap.put("/showTasks", taskFetchAllHandler);
         return hashMap;
     }
 }

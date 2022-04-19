@@ -21,15 +21,14 @@ public class TaskController {
         return task1;
     }
 
-    @GetMapping("/fetch/{id}")
+    @GetMapping("/fetchTask/{id}")
     Task fetchTask(@PathVariable Long id) {
         Task fetchedTask = taskRepository.findById(id).get();
         return fetchedTask;
     }
 
-    @GetMapping("/fetch")
-    ArrayList<Task> fetch(@RequestBody Map<String, String> json) {
-        Long telegramId = Long.parseLong(json.get("telegramId"));
+    @GetMapping("/fetchAll/{telegramId}")
+    ArrayList<Task> fetch(@PathVariable Long telegramId) {
         Task task = new Task(null, telegramId, null, null, null);
         Example example = Example.of(task);
         ArrayList<Task> taskList = (ArrayList<Task>) taskRepository.findAll(example);
