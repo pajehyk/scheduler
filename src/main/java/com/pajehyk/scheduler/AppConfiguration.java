@@ -24,10 +24,6 @@ public class AppConfiguration {
     StartHandler startHandler;
     @Autowired
     TaskFetchAllHandler taskFetchAllHandler;
-    @Bean
-    public SchedulerLongPollingBot schedulerLongPollingBot() {
-        return new SchedulerLongPollingBot();
-    }
 
     @Bean 
     TelegramBotsApi telegramBotsApi() throws TelegramApiException {

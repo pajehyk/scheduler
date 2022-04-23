@@ -17,6 +17,7 @@ import com.pajehyk.scheduler.handlers.Query;
 import com.pajehyk.scheduler.repositories.TelegramUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -24,6 +25,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+@Component
 public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     @Autowired
     private TelegramUserRepository telegramUserRepository;
@@ -35,6 +37,8 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     @Autowired
     @Qualifier("handlersMap")
     private HashMap<String, Handler> handlersMap;
+    @Autowired
+    BotProperties botProperties;
 
 
 
@@ -58,6 +62,7 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         Task task = new Task(null, telegramUser.getTelegramId(), null, null, null);
         Query query = new Query(telegramUser, task, "");
         String text;
+        System.out.println(botProperties.getName());
         if (messageText.startsWith("/")) {
             handlersMap.get(messageText).execute(query);
             text = handlersMap.get(messageText).getMessage();
