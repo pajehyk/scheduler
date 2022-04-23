@@ -29,28 +29,7 @@ public class AppConfiguration {
     TelegramBotsApi telegramBotsApi() throws TelegramApiException {
         return new TelegramBotsApi(DefaultBotSession.class);
     }
-/*
-    @Bean
-    Handler startHandler() {
-        return new StartHandler();
-    }
-    @Bean
-    Handler addTaskHandler() {
-        return new AddTaskHandler();
-    }
-    @Bean
-    Handler changeTaskNameHandler() {
-        return new ChangeTaskNameHandler();
-    }
-    @Bean
-    Handler changeTaskDescriptionHandler() {
-        return new ChangeTaskDescriptionHandler();
-    }
-    @Bean
-    Handler changeTelegramUserTaskHandler() {
-        return new ChangeTelegramUserTaskHandler();
-    }
- */
+
     @Bean
     HashMap<String, Handler> handlersMap() {
         HashMap<String, Handler> hashMap = new HashMap<>();
