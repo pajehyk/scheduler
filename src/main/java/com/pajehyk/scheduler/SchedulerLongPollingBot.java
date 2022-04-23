@@ -1,12 +1,6 @@
 package com.pajehyk.scheduler;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Properties;
 
 import com.pajehyk.scheduler.controllers.TelegramUserController;
 import com.pajehyk.scheduler.entities.Task;
@@ -14,7 +8,6 @@ import com.pajehyk.scheduler.entities.TelegramUser;
 
 import com.pajehyk.scheduler.handlers.Handler;
 import com.pajehyk.scheduler.handlers.Query;
-import com.pajehyk.scheduler.repositories.TelegramUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -28,31 +21,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 public class SchedulerLongPollingBot extends TelegramLongPollingBot {
     @Autowired
-    private TelegramUserRepository telegramUserRepository;
-    @Autowired
     private TelegramUserController telegramUserController;
-    private Properties properties = new Properties();
-    private String botToken;
-    private String botName;
     @Autowired
     @Qualifier("handlersMap")
     private HashMap<String, Handler> handlersMap;
     @Autowired
     BotProperties botProperties;
 
-
-
-    SchedulerLongPollingBot() {
-        try (InputStream is = new FileInputStream(new File("src/main/resources/bot.properties"))) {
-            properties.load(is);
-            botToken = properties.getProperty("bot.token");
-            botName = properties.getProperty("bot.name");
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    SchedulerLongPollingBot() {}
     @Override
     public void onUpdateReceived(Update update) {
         Message updateMessage = update.getMessage();
@@ -89,11 +65,11 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return botName;
+        return botProperties.getName();
     }
 
     @Override
     public String getBotToken() {
-        return botToken;
+        return botProperties.getToken();
     }
 }
