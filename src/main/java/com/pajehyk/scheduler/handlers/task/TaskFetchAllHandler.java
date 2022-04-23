@@ -1,6 +1,8 @@
-package com.pajehyk.scheduler.handlers;
+package com.pajehyk.scheduler.handlers.task;
 
 import com.pajehyk.scheduler.entities.Task;
+import com.pajehyk.scheduler.handlers.Handler;
+import com.pajehyk.scheduler.handlers.Query;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

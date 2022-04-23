@@ -1,6 +1,12 @@
 package com.pajehyk.scheduler;
 
 import com.pajehyk.scheduler.handlers.*;
+import com.pajehyk.scheduler.handlers.task.AddTaskHandler;
+import com.pajehyk.scheduler.handlers.task.ChangeTaskDescriptionHandler;
+import com.pajehyk.scheduler.handlers.task.ChangeTaskNameHandler;
+import com.pajehyk.scheduler.handlers.task.TaskFetchAllHandler;
+import com.pajehyk.scheduler.handlers.telegramuser.ChangeTelegramUserTaskHandler;
+import com.pajehyk.scheduler.handlers.telegramuser.StartHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

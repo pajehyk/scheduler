@@ -1,19 +1,16 @@
-package com.pajehyk.scheduler.handlers;
+package com.pajehyk.scheduler.handlers.task;
 
-import com.pajehyk.scheduler.SchedulerLongPollingBot;
 import com.pajehyk.scheduler.entities.Task;
+import com.pajehyk.scheduler.handlers.telegramuser.ChangeTelegramUserTaskHandler;
+import com.pajehyk.scheduler.handlers.Handler;
+import com.pajehyk.scheduler.handlers.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.Map;
 
 @Component
-public class AddTaskHandler extends Handler{
+public class AddTaskHandler extends Handler {
     @Autowired
     private ChangeTelegramUserTaskHandler changeTelegramUserTaskHandler;
     @Autowired
