@@ -9,6 +9,7 @@ public class Query {
     private String string;
     private String taskName;
     private Long taskId;
+    private Long taskNum;
 
     public Query() {}
 
@@ -56,5 +57,13 @@ public class Query {
 
     public TelegramUser getTelegramUser() {
         return telegramUser;
+    }
+
+    public Long getTaskNum() {
+        return taskNum;
+    }
+
+    public void setTaskNum(Long taskNum) {
+        this.taskNum = taskNum;
     }
 }
