@@ -21,4 +21,14 @@ public class MaxTaskNumberController {
     public void add(@RequestBody MaxTaskNumber maxTaskNumber) {
         maxTaskNumberRepository.save(maxTaskNumber);
     }
+
+    @GetMapping("/incr/{userId}")
+    public void increment(@PathVariable Long userId) {
+        maxTaskNumberRepository.increment(userId);
+    }
+
+    @GetMapping("/decr/{userId}")
+    public void decrement(@PathVariable Long userId) {
+        maxTaskNumberRepository.decrement(userId);
+    }
 }
