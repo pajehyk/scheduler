@@ -12,10 +12,11 @@ public class StartHandler extends Handler {
     public StartHandler() {}
 
     @Override
-    public void execute(Query obj) {
+    public Query execute(Query obj) {
         TelegramUser telegramUser = obj.getTelegramUser();
         HttpEntity<TelegramUser> httpEntity = new HttpEntity<>(telegramUser);
         RestTemplate template = new RestTemplate();
         template.postForLocation(url + "/user/start", httpEntity);
+        return obj;
     }
 }

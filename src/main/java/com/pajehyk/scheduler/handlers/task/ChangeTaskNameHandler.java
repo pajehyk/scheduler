@@ -18,7 +18,7 @@ public class ChangeTaskNameHandler extends Handler {
     @Autowired
     ChangeTelegramUserHandlerHandler changeTelegramUserHandlerHandler;
     @Override
-    public void execute(Query obj) {
+    public Query execute(Query obj) {
         Long telegramId = obj.getTelegramUser().getTelegramId();
         Long taskId = obj.getTelegramUser().getCurrentTaskId();
         String taskName = obj.getString();
@@ -30,6 +30,7 @@ public class ChangeTaskNameHandler extends Handler {
         template.put(url + "/task/changeName", httpEntity);
         obj.setString("/changeTaskDescription");
         changeTelegramUserHandlerHandler.execute(obj);
+        return obj;
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.Map;
 @Component
 public class ChangeTelegramUserHandlerHandler extends Handler {
     @Override
-    public void execute(Query obj) {
+    public Query execute(Query obj) {
         Long telegramId = obj.getTelegramUser().getTelegramId();
         String handlerString = obj.getString();
         RestTemplate template = new RestTemplate();
@@ -21,5 +21,6 @@ public class ChangeTelegramUserHandlerHandler extends Handler {
         map.put("handlerString", handlerString);
         HttpEntity<Map<String, String>> httpEntity = new HttpEntity<>(map);
         template.put(url + "/user/changeHandler", httpEntity);
+        return obj;
     }
 }

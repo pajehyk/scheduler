@@ -16,7 +16,7 @@ public class AddTaskHandler extends Handler {
     @Autowired
     private ChangeTelegramUserHandlerHandler changeTelegramUserHandlerHandler;
     @Override
-    public  void execute(Query obj) {
+    public Query execute(Query obj) {
         Task task = obj.getTask();
         HttpEntity<Task> httpEntity = new HttpEntity<>(task);
         RestTemplate template = new RestTemplate();
@@ -25,6 +25,7 @@ public class AddTaskHandler extends Handler {
         obj.setString("/changeTaskName");
         changeTelegramUserTaskHandler.execute(obj);
         changeTelegramUserHandlerHandler.execute(obj);
+        return obj;
     }
 
     @Override
