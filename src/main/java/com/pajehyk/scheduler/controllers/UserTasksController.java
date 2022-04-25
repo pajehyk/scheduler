@@ -27,7 +27,7 @@ public class UserTasksController {
     }
 
     @GetMapping("/getList/{userId}")
-    public List<UserTasks> get(@PathVariable Long userId) {
+    public List<UserTasks> getList(@PathVariable Long userId) {
         return userTasksRepository.getUserTasksById(userId);
     }
 }
