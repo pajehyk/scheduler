@@ -25,4 +25,9 @@ public class UserTasksController {
         List<UserTasks> list = userTasksRepository.findAll(Example.of(userTasks));
         return list;
     }
+
+    @GetMapping("/getList/{userId}")
+    public List<UserTasks> get(@PathVariable Long userId) {
+        return userTasksRepository.getUserTasksById(userId);
+    }
 }
