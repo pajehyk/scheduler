@@ -10,10 +10,14 @@ public class UserTasks {
     private Long id;
     @Column(name = "user_id")
     private Long userId;
-    @Column(name = "task_id")
+    @Column(name = "task_id", insertable = false, updatable = false)
     private Long taskId;
     @Column(name = "task_num")
     private Long taskNum;
+
+    @OneToOne
+    @JoinColumn(name = "task_id", referencedColumnName = "id")
+    private Task task;
 
     protected UserTasks() {}
 
@@ -64,5 +68,13 @@ public class UserTasks {
 
     public Long getTaskNum() {
         return taskNum;
+    }
+
+    public Task getTask() {
+        return this.task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
     }
 }
