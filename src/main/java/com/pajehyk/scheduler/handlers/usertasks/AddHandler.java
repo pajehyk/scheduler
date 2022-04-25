@@ -22,8 +22,9 @@ public class AddHandler extends Handler {
         Long taskId = obj.getTaskId();
         Long userId = obj.getTelegramUser().getTelegramId();
         Long taskNum = getTaskNumHandler.execute(obj).getTaskNum();
-        UserTasks userTasks = new UserTasks(userId, taskId, taskNum);
+        UserTasks userTasks = new UserTasks(userId, taskId, taskNum, obj.getTask());
         HttpEntity<UserTasks>  httpEntity = new HttpEntity<>(userTasks);
+        System.out.println(userTasks.getTaskId());
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForEntity(url + "/tasks/add", httpEntity, UserTasks.class);
         incrementHandler.execute(obj);

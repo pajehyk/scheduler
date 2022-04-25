@@ -21,7 +21,7 @@ public class UserTasksController {
 
     @GetMapping("/get/{userId}")
     public List<UserTasks> get(@PathVariable long userId) {
-        UserTasks userTasks = new UserTasks(null, userId, null, null);
+        UserTasks userTasks = new UserTasks((Long) null, userId, (Long) null, (Long) null);
         List<UserTasks> list = userTasksRepository.findAll(Example.of(userTasks));
         return list;
     }

@@ -38,6 +38,13 @@ public class UserTasks {
         this.taskNum = taskNum;
     }
 
+    public UserTasks(Long userId, Long taskId, Long taskNum, Task task) {
+        this.userId = userId;
+        this.taskId = taskId;
+        this.taskNum = taskNum;
+        this.task = task;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

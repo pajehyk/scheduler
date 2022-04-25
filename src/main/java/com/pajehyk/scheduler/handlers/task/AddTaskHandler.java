@@ -25,6 +25,7 @@ public class AddTaskHandler extends Handler {
         HttpEntity<Task> httpEntity = new HttpEntity<>(task);
         RestTemplate template = new RestTemplate();
         Task addedTask = template.postForEntity(url + "/task/add", httpEntity, Task.class).getBody();
+        obj.setTask(addedTask);
         obj.setTaskId(addedTask.getId());
         obj.setString("/changeTaskName");
         addHandler.execute(obj);
