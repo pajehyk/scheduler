@@ -1,11 +1,13 @@
 package com.pajehyk.scheduler.handlers;
 
+import com.pajehyk.scheduler.entities.MaxTaskNumber;
 import com.pajehyk.scheduler.entities.Task;
 import com.pajehyk.scheduler.entities.TelegramUser;
 
 public class Query {
     private TelegramUser telegramUser;
     private Task task;
+    private MaxTaskNumber maxTaskNumber;
     private String string;
     private String taskName;
     private Long taskId;
@@ -65,5 +67,13 @@ public class Query {
 
     public void setTaskNum(Long taskNum) {
         this.taskNum = taskNum;
+    }
+
+    public MaxTaskNumber getMaxTaskNumber() {
+        return maxTaskNumber;
+    }
+
+    public void setMaxTaskNumber(MaxTaskNumber maxTaskNumber) {
+        this.maxTaskNumber = maxTaskNumber;
     }
 }

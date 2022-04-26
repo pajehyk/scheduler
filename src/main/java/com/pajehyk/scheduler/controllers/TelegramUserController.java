@@ -16,8 +16,8 @@ public class TelegramUserController {
     TelegramUserRepository telegramUserRepository;
 
     @PostMapping("/start")
-    public void addTelegramUser(@RequestBody TelegramUser telegramUser){
-        telegramUserRepository.save(telegramUser);
+    public TelegramUser addTelegramUser(@RequestBody TelegramUser telegramUser){
+        return telegramUserRepository.save(telegramUser);
     }
     public TelegramUser fetchTelegramUser(long telegramId) {
         TelegramUser telegramUser = new TelegramUser(telegramId);
