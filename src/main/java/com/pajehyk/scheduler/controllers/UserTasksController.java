@@ -31,7 +31,7 @@ public class UserTasksController {
         return userTasksRepository.getUserTasksById(userId);
     }
 
-    @PutMapping("/complete/}")
+    @PutMapping("/complete")
     public void completeTask() {
 
     }
