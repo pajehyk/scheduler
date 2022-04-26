@@ -43,10 +43,10 @@ public class UserTasksController {
 
     @PutMapping("/complete/{telegramId}/{taskNum}")
     public void completeTask(@PathVariable Long telegramId, @PathVariable Long taskNum) {
+        Long taskId = getTaskId(telegramId, taskNum);
         userTasksRepository.completeTaskByTelegramIdTaskNum(telegramId, taskNum);
         userTasksRepository.updateTaskNumsByTelegramIdTaskNum(telegramId, taskNum);
         maxTaskNumberController.decrement(telegramId);
-        Long taskId = getTaskId(telegramId, taskNum);
         taskController.completeTask(taskId);
     }
 }
