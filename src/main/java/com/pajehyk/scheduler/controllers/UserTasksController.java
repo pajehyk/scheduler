@@ -13,6 +13,10 @@ import java.util.List;
 public class UserTasksController {
     @Autowired
     UserTasksRepository userTasksRepository;
+    @Autowired
+    MaxTaskNumberController maxTaskNumberController;
+    @Autowired
+    TaskController taskController;
 
     @PostMapping("/add")
     public void add(@RequestBody UserTasks userTasks) {
@@ -31,8 +35,18 @@ public class UserTasksController {
         return userTasksRepository.getUserTasksById(userId);
     }
 
-    @PutMapping("/complete")
-    public void completeTask() {
+    public Long getTaskId(Long telegramId, Long taskNum) {
+        UserTasks userTasks = new UserTasks(telegramId, taskNum);
+        UserTasks fetchedUserTasks = userTasksRepository.findOne(Example.of(userTasks)).get();
+        return fetchedUserTasks.getTaskId();
+    }
 
+    @PutMapping("/complete/{telegramId}/{taskNum}")
+    public void completeTask(@PathVariable Long telegramId, @PathVariable Long taskNum) {
+        userTasksRepository.completeTaskByTelegramIdTaskNum(telegramId, taskNum);
+        userTasksRepository.updateTaskNumsByTelegramIdTaskNum(telegramId, taskNum);
+        maxTaskNumberController.decrement(telegramId);
+        Long taskId = getTaskId(telegramId, taskNum);
+        taskController.completeTask(taskId);
     }
 }
