@@ -19,18 +19,21 @@ public class Task {
     private Date creationDate;
     @Column(name = "completion_date")
     private Date completionDate;
+    private boolean completed;
 
     @OneToOne(mappedBy = "task")
     private UserTasks userTasks;
 
     protected Task() {}
 
-    public Task(String taskName, Long userId, String description, Date creationDate, Date completionDate) {
+    public Task(String taskName, Long userId, String description, Date creationDate,
+                Date completionDate, Boolean completed) {
         this.taskName = taskName;
         this.userId = userId;
         this.description = description;
         this.creationDate = creationDate;
         this.completionDate = completionDate;
+        this.completed = completed;
     }
 
     public Long getId() {

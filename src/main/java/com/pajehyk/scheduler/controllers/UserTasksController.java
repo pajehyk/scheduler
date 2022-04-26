@@ -30,4 +30,9 @@ public class UserTasksController {
     public List<UserTasks> getList(@PathVariable Long userId) {
         return userTasksRepository.getUserTasksById(userId);
     }
+
+    @PutMapping("/complete/}")
+    public void completeTask() {
+
+    }
 }

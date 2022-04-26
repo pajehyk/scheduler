@@ -35,7 +35,8 @@ public class SchedulerLongPollingBot extends TelegramLongPollingBot {
         String messageText = updateMessage.getText();
         User user = updateMessage.getFrom();
         TelegramUser telegramUser = new TelegramUser(user);
-        Task task = new Task(null, telegramUser.getTelegramId(), null, null, null);
+        Task task = new Task(null, telegramUser.getTelegramId(),
+                null, null, null, false);
         Query query = new Query(telegramUser, task, "");
         String text;
         if (messageText.startsWith("/")) {

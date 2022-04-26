@@ -17,6 +17,7 @@ public class TestingTaskController {
     @Autowired
     private TaskRepository taskRepository;
 
+/*
     Task testTask = new Task("", -1L,
             "", new Date(1), new Date(1));
     @Test
@@ -34,6 +35,7 @@ public class TestingTaskController {
         Task fetchedTask = taskController.fetchTask(task.getId());
         assertTrue(fetchedTask.equals(task));
     }
+*/
 
     /*@Test
     @Transactional

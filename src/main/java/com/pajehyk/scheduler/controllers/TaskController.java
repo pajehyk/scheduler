@@ -29,7 +29,8 @@ public class TaskController {
 
     @GetMapping("/fetchAll/{telegramId}")
     ArrayList<Task> fetch(@PathVariable Long telegramId) {
-        Task task = new Task(null, telegramId, null, null, null);
+        Task task = new Task(null, telegramId, null,
+                null, null, null);
         Example example = Example.of(task);
         ArrayList<Task> taskList = (ArrayList<Task>) taskRepository.findAll(example);
         return taskList;
