@@ -1,4 +1,4 @@
-package com.pajehyk.scheduler.handlers.task;
+package com.pajehyk.scheduler.handlers.telegramuser;
 
 import com.pajehyk.scheduler.handlers.Handler;
 import com.pajehyk.scheduler.handlers.Query;

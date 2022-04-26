@@ -1,6 +1,7 @@
 package com.pajehyk.scheduler.handlers.task;
 
 import com.pajehyk.scheduler.entities.Task;
+import com.pajehyk.scheduler.handlers.telegramuser.ChangeTelegramUserHandlerHandler;
 import com.pajehyk.scheduler.handlers.telegramuser.ChangeTelegramUserTaskHandler;
 import com.pajehyk.scheduler.handlers.Handler;
 import com.pajehyk.scheduler.handlers.Query;

@@ -3,6 +3,7 @@ package com.pajehyk.scheduler.handlers.task;
 import com.pajehyk.scheduler.controllers.TelegramUserController;
 import com.pajehyk.scheduler.handlers.Handler;
 import com.pajehyk.scheduler.handlers.Query;
+import com.pajehyk.scheduler.handlers.telegramuser.ChangeTelegramUserHandlerHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
