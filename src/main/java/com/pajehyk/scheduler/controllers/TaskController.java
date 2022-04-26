@@ -53,4 +53,9 @@ public class TaskController {
         fetchedTask.setDescription(taskDescription);
         taskRepository.save(fetchedTask);
     }
+
+    @PutMapping("/complete/{id}")
+    public void completeTask(@PathVariable Long id) {
+        taskRepository.completeById(id);
+    }
 }
