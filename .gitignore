@@ -1,6 +1,7 @@
 .gradle
 /build/
 
+.idea/
 # Ignore Gradle GUI config
 gradle-app.setting
 
@@ -20,6 +21,7 @@ gradlew
 gradlew.bat
 
 src/main/resources/bot.properties
+src/main/resources/application.properties
 
 bin/
 
